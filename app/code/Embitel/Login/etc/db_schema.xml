@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_entity" resource="default" engine="innodb" comment="Customer Entity">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="smallint" name="website_id" unsigned="true" nullable="true" identity="false"
+                comment="Website ID"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Email"/>
+        <column xsi:type="smallint" name="group_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Group ID"/>
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="50" comment="Increment ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="true" identity="false"
+                default="0" comment="Store ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <column xsi:type="smallint" name="is_active" unsigned="true" nullable="false" identity="false"
+                default="1" comment="Is Active"/>
+        <column xsi:type="smallint" name="disable_auto_group_change" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Disable automatic group change based on VAT ID"/>
+        <column xsi:type="varchar" name="created_in" nullable="true" length="255" comment="Created From"/>
+        <column xsi:type="varchar" name="prefix" nullable="true" length="40" comment="Name Prefix"/>
+        <column xsi:type="varchar" name="firstname" nullable="true" length="255" comment="First Name"/>
+        <column xsi:type="varchar" name="middlename" nullable="true" length="255" comment="Middle Name/Initial"/>
+        <column xsi:type="varchar" name="lastname" nullable="true" length="255" comment="Last Name"/>
+        <column xsi:type="varchar" name="suffix" nullable="true" length="40" comment="Name Suffix"/>
+        <column xsi:type="date" name="dob" comment="Date of Birth"/>
+        <column xsi:type="varchar" name="password_hash" nullable="true" length="128" comment="Password_hash"/>
+        <column xsi:type="varchar" name="rp_token" nullable="true" length="128" comment="Reset password token"/>
+        <column xsi:type="datetime" name="rp_token_created_at" on_update="false" nullable="true"
+                comment="Reset password token creation time"/>
+        <column xsi:type="int" name="default_billing" unsigned="true" nullable="true" identity="false"
+                comment="Default Billing Address"/>
+        <column xsi:type="int" name="default_shipping" unsigned="true" nullable="true" identity="false"
+                comment="Default Shipping Address"/>
+        <column xsi:type="varchar" name="taxvat" nullable="true" length="50" comment="Tax/VAT Number"/>
+        <column xsi:type="varchar" name="confirmation" nullable="true" length="64" comment="Is Confirmed"/>
+        <column xsi:type="smallint" name="gender" unsigned="true" nullable="true" identity="false"
+                comment="Gender"/>
+        <column xsi:type="smallint" name="failures_num" unsigned="false" nullable="true" identity="false"
+                default="0" comment="Failure Number"/>
+        <column xsi:type="timestamp" name="first_failure" on_update="false" nullable="true" comment="First Failure"/>
+        <column xsi:type="timestamp" name="lock_expires" on_update="false" nullable="true"
+                comment="Lock Expiration Date"/>
+        <column xsi:type="timestamp" name="session_cutoff" on_update="false" nullable="true"
+                comment="Session Cutoff Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="CUSTOMER_ENTITY_STORE_ID_STORE_STORE_ID" table="customer_entity"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="SET NULL"/>
+        <constraint xsi:type="foreign" referenceId="CUSTOMER_ENTITY_WEBSITE_ID_STORE_WEBSITE_WEBSITE_ID"
+                    table="customer_entity" column="website_id" referenceTable="store_website"
+                    referenceColumn="website_id" onDelete="SET NULL"/>
+        <constraint xsi:type="unique" referenceId="CUSTOMER_ENTITY_EMAIL_WEBSITE_ID">
+            <column name="email"/>
+            <column name="website_id"/>
+        </constraint>
+        <index referenceId="CUSTOMER_ENTITY_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="CUSTOMER_ENTITY_WEBSITE_ID" indexType="btree">
+            <column name="website_id"/>
+        </index>
+        <index referenceId="CUSTOMER_ENTITY_FIRSTNAME" indexType="btree">
+            <column name="firstname"/>
+        </index>
+        <index referenceId="CUSTOMER_ENTITY_LASTNAME" indexType="btree">
+            <column name="lastname"/>
+        </index>
+    </table>
+    </schema>

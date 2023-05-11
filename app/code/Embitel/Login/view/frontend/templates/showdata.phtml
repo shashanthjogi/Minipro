@@ -1,0 +1,57 @@
+<?php
+	$collection = $block->getCollection();
+if ($collection->count()) {
+?>
+<div class="table-wrapper orders-history">
+    <table class="data table table-order-items history" id="my-orders-table">
+        <thead>
+        <tr>
+            <th><?php echo __('Entity ID') ?></th>
+            <th><?php echo __('First Name') ?></th>
+            <th><?php echo __('Last Name') ?></th>           
+            <th><?php echo __('Email') ?></th>
+            <th><?php echo __('Mobile Number') ?></th>
+            <th><?php echo __('Occupation') ?></th>
+            <th><?php echo __('Created at') ?></th>
+            <th><?php echo __('Updated at') ?></th>
+           
+
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+				foreach ($collection as $item): ?>
+        <tr>
+            <td>
+                <?php echo $item->getentity_id() ?>
+            </td>
+            <td>
+                <?php echo $item->getfirstname() ?>
+            </td>
+            <td>
+                <?php echo $item->getlastname() ?>
+            </td>
+            <td>
+                <?php echo $item->getemail() ?>
+            </td>
+           <td>
+            <?php echo $item->getnumber() ?>
+           </td>
+           <td>
+            <?php echo $item->getoccupation() ?>
+           </td>
+           <td>
+            <?php echo $item->getcreated_at() ?>
+           </td>
+           <td>
+            <?php echo $item->getupdated_at() ?>
+           </td>
+            
+        </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<?php
+	}
+	?>

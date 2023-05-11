@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Embitel_Login::menu" title="PG Blog" module="Embitel_Login" sortOrder="100" resource="Embitel_Login::menu"/>
+        <add id="Embitel_Login::blog" title="Blog posts" module="Embitel_Login" sortOrder="10" action="embitel_login/blog" resource="Embitel_Login::blog" parent="Embitel_Login::menu"/>
+    </menu>
+</config>

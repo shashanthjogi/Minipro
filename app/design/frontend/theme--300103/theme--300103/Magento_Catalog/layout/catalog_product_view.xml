@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+  <body>
+  	<container name="product.info.main" htmlTag="div" htmlClass="product-info-main col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12" before="-"/>
+  	<container name="bundle.options.container" htmlTag="div" htmlClass="bundle-options-container" after="product.info.media"/>
+  	<container name="product.info.media" htmlTag="div" htmlClass="product media col-xl-6 col-lg-6 col-sm-12 col-md-6 col-xs-12 col-12" after="product.info.main">
+  		<block class="Magento\Framework\View\Element\Template" name="skip_gallery_after.target" before="skip_gallery_before.wrapper" template="Magento_Theme::html/skiptarget.phtml">
+  			<arguments>
+  				<argument name="target_id" xsi:type="string">gallery-prev-area</argument>
+  			</arguments>
+  		</block>
+  		<container name="skip_gallery_before.wrapper" htmlTag="div" htmlClass="action-skip-wrapper">
+  			<block class="Magento\Framework\View\Element\Template"  name="skip_gallery_before" template="Magento_Theme::html/skip.phtml">
+  				<arguments>
+  					<argument name="target" xsi:type="string">gallery-next-area</argument>
+  					<argument name="label" translate="true" xsi:type="string">Skip to the end of the images gallery</argument>
+  				</arguments>
+  			</block>
+  		</container>
+  		<block class="Magento\Catalog\Block\Product\View\Gallery" name="product.info.media.image" template="Magento_Catalog::product/view/gallery.phtml">
+  			<arguments>
+  				<argument name="gallery_options" xsi:type="object">Magento\Catalog\Block\Product\View\GalleryOptions</argument>
+  				<argument name="imageHelper" xsi:type="object">Magento\Catalog\Helper\Image</argument>
+  			</arguments>
+  		</block>
+  		<container name="skip_gallery_after.wrapper" htmlTag="div" htmlClass="action-skip-wrapper">
+  			<block class="Magento\Framework\View\Element\Template" name="skip_gallery_after" template="Magento_Theme::html/skip.phtml">
+  				<arguments>
+  					<argument name="target" xsi:type="string">gallery-prev-area</argument>
+  					<argument name="label" translate="true" xsi:type="string">Skip to the beginning of the images gallery</argument>
+  				</arguments>
+  			</block>
+  		</container>
+  		<block class="Magento\Framework\View\Element\Template" name="skip_gallery_before.target" after="skip_gallery_after.wrapper" template="Magento_Theme::html/skiptarget.phtml">
+  			<arguments>
+  				<argument name="target_id" xsi:type="string">gallery-next-area</argument>
+  			</arguments>
+  		</block>
+  	</container>
+  	<block class="Magento\Catalog\Block\Product\View\Details" name="product.info.details" template="Magento_Catalog::product/view/details.phtml" after="product.info.media">
+  		<block class="Magento\Catalog\Block\Product\View\Description" name="product.info.description" as="description" template="Magento_Catalog::product/view/attribute.phtml" group="detailed_info">
+  			<arguments>
+  				<argument name="at_call" xsi:type="string">
+  				getDescription
+  				</argument>
+  				<argument name="at_code" xsi:type="string">
+  				description
+  				</argument>
+  				<argument name="css_class" xsi:type="string">
+  				description
+  				</argument>
+  				<argument name="at_label" xsi:type="string">
+  				none
+  				</argument>
+  				<argument name="title" translate="true" xsi:type="string">
+  				Details
+  				</argument>
+  				<argument name="sort_order" xsi:type="string">
+  				10
+  				</argument>
+  			</arguments>
+  		</block>
+  		<block class="Magento\Catalog\Block\Product\View\Attributes" name="product.attributes" as="additional" template="Magento_Catalog::product/view/attributes.phtml" group="detailed_info">
+  			<arguments>
+  				<argument translate="true" name="title" xsi:type="string">
+  				More Information
+  				</argument>
+  				<argument name="sort_order" xsi:type="string">
+  				20
+  				</argument>
+  			</arguments>
+  		</block>
+  	</block>
+  	
+  	<block class="Magento\Catalog\Block\Product\ProductList\Related" name="catalog.product.related" template="Magento_Catalog::product/list/items.phtml" after="product.info.details">
+  		<arguments>
+  			<argument name="type" xsi:type="string">related</argument>
+  			<argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
+  		</arguments>
+  		<block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto" as="addto">
+  			<block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+  			       name="related.product.addto.compare" as="compare"
+  			       template="Magento_Catalog::product/list/addto/compare.phtml"/>
+  		</block>
+  	</block>
+  	<block class="Magento\Catalog\Block\Product\ProductList\Upsell" name="product.info.upsell" template="Magento_Catalog::product/list/items.phtml" after="product.info.details">
+  		<arguments>
+  			<argument name="type" xsi:type="string">upsell</argument>
+  			<argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
+  		</arguments>
+  		<block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="upsell.product.addto" as="addto">
+  			<block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+  			       name="upsell.product.addto.compare" as="compare"
+  			       template="Magento_Catalog::product/list/addto/compare.phtml"/>
+  		</block>
+  	</block>
+  	
+  	<move element="product.info.main" destination="content"/>
+  	<move element="page.main.title" destination="product.info.main" before="-"/>
+  	<move element="bundle.options.container" destination="content" after="product.info.main"/>
+  	<move element="product.info.media" destination="content" before="-"/>
+  	<move element="product.info.details" destination="content"/>
+	<move element="catalog.product.related" destination="content"/>
+	<move element="product.info.upsell" destination="content"/>
+  </body>
+</page>

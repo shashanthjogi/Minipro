@@ -1,0 +1,49 @@
+{
+    "customer_entity": {
+        "column": {
+            "entity_id": true,
+            "number": true,
+            "occupation": true,
+            "website_id": true,
+            "email": true,
+            "group_id": true,
+            "increment_id": true,
+            "store_id": true,
+            "created_at": true,
+            "updated_at": true,
+            "is_active": true,
+            "disable_auto_group_change": true,
+            "created_in": true,
+            "prefix": true,
+            "firstname": true,
+            "middlename": true,
+            "lastname": true,
+            "suffix": true,
+            "dob": true,
+            "password_hash": true,
+            "rp_token": true,
+            "rp_token_created_at": true,
+            "default_billing": true,
+            "default_shipping": true,
+            "taxvat": true,
+            "confirmation": true,
+            "gender": true,
+            "failures_num": true,
+            "first_failure": true,
+            "lock_expires": true,
+            "session_cutoff": true
+        },
+        "index": {
+            "CUSTOMER_ENTITY_STORE_ID": true,
+            "CUSTOMER_ENTITY_WEBSITE_ID": true,
+            "CUSTOMER_ENTITY_FIRSTNAME": true,
+            "CUSTOMER_ENTITY_LASTNAME": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CUSTOMER_ENTITY_STORE_ID_STORE_STORE_ID": true,
+            "CUSTOMER_ENTITY_WEBSITE_ID_STORE_WEBSITE_WEBSITE_ID": true,
+            "CUSTOMER_ENTITY_EMAIL_WEBSITE_ID": true
+        }
+    }
+}
